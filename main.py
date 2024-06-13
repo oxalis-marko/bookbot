@@ -16,12 +16,25 @@ def char_count(book):
             chars[char] += 1
     return chars
 
+def form_dict(dict):
+    new_dict = {}
+    for p, v in dict.items():
+        if p.isalpha():
+            new_dict[p] = dict[p]
+    return new_dict
+
 
 def main():
     book_path = "books/frankenstein.txt"
     book_contents = get_book_contets(book_path)
     words = word_count(book_contents)
     num_of_chars = char_count(book_contents)
-    print(num_of_chars)
+    formed_dict = form_dict(num_of_chars)
+    report_dict = sorted(formed_dict.items(), key = lambda formed_dict: formed_dict[1], reverse = True)
+    print("### Begin report of books/frankenstein.txt ###")
+    print(f"{words} words found inside the document\n")
+    for i, n in report_dict:
+        print(f"The '{i}' character was found {n} times")
+    print("### end report ###")
 
 main()
